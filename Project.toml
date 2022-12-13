@@ -1,0 +1,13 @@
+name = "VaeModels"
+uuid = "09094db9-acbb-48eb-adce-9c10a6f38d75"
+authors = ["Matthew Scott <m.valckescott@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
+Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
+MLDatasets = "eb30cadb-4394-5ae3-aed4-317e484a6458"
+ProgressLogging = "33c8b6b6-d38a-422a-b730-caa89a2f386c"
+TensorBoardLogger = "899adc3e-224a-11e9-021f-63837185c80f"
