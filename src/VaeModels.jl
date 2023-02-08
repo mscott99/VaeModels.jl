@@ -4,6 +4,8 @@ using Flux: DataLoader, params, pullback, logitbinarycrossentropy
 using BSON: @load, @save
 using TensorBoardLogger, Logging, ProgressLogging
 using LinearAlgebra: diagm
+using Random: TaskLocalRNG
+using Optimisers
 
 include("base.jl")
 include("architectures.jl")

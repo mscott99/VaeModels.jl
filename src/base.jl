@@ -20,7 +20,7 @@ Flux.@functor FullVae
 
 
 #forward pass
-function (m::FullVae)(x::Vector; rng=TaskLocalRNG())
+function (m::FullVae)(x::AbstractArray; rng=TaskLocalRNG())
     μ, logvar = m.encoder(x)
     randcoeffs = randn(rng, Float32, size(logvar))
     z = μ .+ randcoeffs .* exp.(0.5f0 .* logvar)
@@ -29,9 +29,8 @@ end
 
 
 #averaged forward pass
-function (m::FullVae)(x::Vector, n::Integer; rng=TaskLocalRNG())
-    #preformance gain available by getting mu and logvar once, and sampling many times
-    acc = zero(m(x))
+function (m::FullVae)(x::AbstractArray, n::Integer; rng=TaskLocalRNG())
+    acc = zero(m(x; rng))
     μ, logvar = m.encoder(x)
     #acc = zero(m.decoder(zeros(Float32, size(logvar))))
 
@@ -43,11 +42,12 @@ function (m::FullVae)(x::Vector, n::Integer; rng=TaskLocalRNG())
     acc ./ n
 end
 
-function (m::FullVae)(x::Matrix; kwargs...)
-    m(reshape(x, :); kwargs...)
-end
 
-function (m::FullVae)(x::Matrix, n::Integer; rng=TaskLocalRNG())
-    #preformance gain available by getting mu and logvar once, and sampling many times
-    m(reshape(x, :), n; rng=rng)
-end
+#function (m::FullVae)(x::Matrix; kwargs...)
+#    m(reshape(x, :); kwargs...)
+#end
+
+#function (m::FullVae)(x::Matrix, n::Integer; rng=TaskLocalRNG())
+#preformance gain available by getting mu and logvar once, and sampling many times
+#    m(reshape(x, :), n; rng=rng)
+#end
